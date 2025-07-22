@@ -7,4 +7,4 @@ Automatizar a validação do código em pipelines de CI/CD.
 Especialmente em sistemas que crescem rápido ou têm muitas regras, os testes unitários ajudam a evitar efeitos colaterais inesperados e aumentam a confiabilidade do software.
 
 
-O teste da Classe CacheLRU está localizado em: src/test/java/TestExercicio01/CacheLRUTest.java
+O teste da Classe CacheLRU está localizado em: src/test/java/TestExercicio08/CacheLRUTest.java

@@ -1,4 +1,4 @@
-package TestExercicio01;
+package TestExercicio08;
 
 import Exercicio01.CacheLRU;
 import org.junit.Test;
