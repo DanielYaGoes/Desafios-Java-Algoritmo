@@ -1,0 +1,7 @@
+Primeiro para identificar consultas lentas na aplicação ultilizo dos logs de consultas lentas para descobrir sobre queries
+que estão demorando para serem processadas, esse log existe no PostgreSQL por exemplo
+se tratando de ambientes de produção se torna bem util por conta do volume de dados, baseado nas analises criaria
+indices nas colunas user_id da tabela posts,em caso de listar postagens em ordem cronologica a created_at da tabela posts ,
+e apesar de não mostrar na imagem supoe uma tabela de LIKE em posts, então deixar um indice numa coluna post_id seria interessante. Essas provavelmente aparecem varias vezes
+em clausulas como WHERE, JOIN E Order by, então é interessante manter o indice nelas, formas de otimizar seria tomar cuidado com algumas consultas , trazer os dados
+por paginação seria interessante pois não precisaria trazer todos os dados de uma vez e também evitar subconsultas aninhadas

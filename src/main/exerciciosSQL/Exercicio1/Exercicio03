@@ -1,0 +1,7 @@
+Tudo seria basaedo em um bom planejamento e acompanhamento das tabelas, por exemplo garantir que elas estejam bem modeladas ,
+ com chaves primárias e estrangeiras,uma boa ultilização dos indices monitorando eles para retirar caso necessario
+existem ferramentas como EXPLAIN para ajudar no monitoramento das queries e dependendo politicas de exclusão lógica ou física
+de dados obsoletos, como logs. Sobre o particionamento ele tem que ser acima de tudo util e funcional , existir colunas
+ de filtro comum para ajudar o particionamento, a velocidade de crescimento da tabela para verificar se vale a pena, ao particionar
+ tem que melhorar leitura e manutenção, a recuperação ou migração desses dados tem que ser facilitada e termos consultas mais rapidas,
+os criterios devem ser atendidos pois o sistema se torna mais complexo e requer mais cuidado.

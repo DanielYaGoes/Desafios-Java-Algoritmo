@@ -1,0 +1,8 @@
+Trabalhei em um projeto de e-commerce de apostilas, onde precisei otimizar a performance do banco de dados e também garantir que os dados permanecessem íntegros.
+Para melhorar a performance, implementei um filtro de data que limitava os pedidos exibidos na página de histórico a, por padrão, últimos três meses, reduzindo o volume de dados carregados.
+Também otimizei as consultas Hibernate para carregar apenas os campos necessários, o que reduziu o tempo de carregamento de 3 segundos para menos de 300 milissegundos.
+Além disso, para garantir a integridade dos dados, revisei e ajustei as constraints no banco de dados, como chaves estrangeiras e regras de unicidade, para evitar dados duplicados
+ou órfãos. Implementei transações nas operações críticas de atualização de pedidos, garantindo que nenhuma alteração parcial acontecesse, mesmo em caso de falhas ou concorrência.
+Também configurei o nível de isolamento das transações para evitar problemas como leitura suja ou não repetível, comuns em ambientes de alta concorrência.
+Com essas mudanças, além de melhorar significativamente a performance, garantimos que os dados permanecessem consistentes e confiáveis, o que elevou a estabilidade do sistema e a
+confiança dos usuários no histórico dos seus pedidos.

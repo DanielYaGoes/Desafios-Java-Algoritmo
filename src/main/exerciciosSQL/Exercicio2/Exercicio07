@@ -1,0 +1,9 @@
+Na prática, eu ainda não tive a oportunidade de aplicar procedures e triggers em um projeto real de produção, mas durante meus estudos , eu explorei bastante
+esses recursos para entender como eles funcionam e como ajudam a garantir a integridade dos dados. Por exemplo, em um exercício que simula um sistema bancário, eu criei uma procedure
+que fazia a transferência de valores entre contas. Nessa procedure, eu usava uma transação com BEGIN TRANSACTION, COMMIT e ROLLBACK, justamente para garantir que o valor fosse debitado
+de uma conta e creditado na outra apenas se as duas ações fossem concluídas com sucesso. Se desse algum erro no meio, como saldo insuficiente, a procedure usava o ROLLBACK para desfazer tudo,
+garantindo a integridade dos dados. Além disso, eu também pratiquei o uso de triggers. Um dos exemplos foi criar uma trigger que registrava automaticamente em uma tabela de histórico toda vez
+que uma conta era atualizada. Isso foi importante para entender como os dados do INSERTED e DELETED funcionam, e como é possível auditar mudanças automaticamente, sem depender da aplicação.
+Mesmo sendo experiências de estudo, esses exercícios me ajudaram a entender a importância de usar esses recursos para manter a consistência dos dados no banco. Estou animado para aplicar
+esse conhecimento na prática, em um projeto real, assim que surgir a oportunidade.
+

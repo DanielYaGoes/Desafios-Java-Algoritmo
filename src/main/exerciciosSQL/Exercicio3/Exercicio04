@@ -1,0 +1,4 @@
+problemas de performance em consultas envolvendo múltiplas tabelas geralmente acontecem por causa de joins mal otimizados, falta de índices, ou até pelo volume de dados retornado.
+Como respondi em outras questões , será necessário observar quais consultas estão lentas, podendo usar os logs ou ferramentas como EXPLAIN, caso eu encontre uma consulta que está lenta
+procuraria reescrever buscando trazer apenas dados necessários, outra forma para ajudar mais na otimização seria a criação de indices e dependendo da quantidade de dados é interessante aplicar
+paginação , poderia considerar também a desnormalização se fosse viavel

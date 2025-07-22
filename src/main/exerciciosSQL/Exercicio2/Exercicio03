@@ -1,0 +1,13 @@
+O COMMIT confirma todas as alterações feitas em uma transação. Depois do COMMIT, as mudanças ficam permanentes no banco.
+O ROLLBACK desfaz todas as alterações feitas desde o inicio da transação.
+Existem transações que para manterem a integridade tudo nela tem que dar certo, dessa forma usamos o COMMIT para confirmar que tudo que aconteceu na transação está correto e pode ser salvo
+E caso algo de errado no meio da transação existe o ROLLBACK para desfazer tudo que foi feito e voltar ao ponto de partida.
+
+Um exemplo seria uma transação de banco
+
+Conta A vai passar um Valor para a Conta B, para isso é necessário debitar o Valor da Conta A e depositar o Valor na conta B
+Caso tudo ocorra corretamente, usamos o COMMIT para confirmar as alterações. Mas, como existe a possibilidade de erro durante a
+transação (por exemplo, a conta B pode estar bloqueada), é necessário garantir que, nesse caso, o sistema execute um ROLLBACK para desfazer tudo.
+Não queremos que a Conta A perca seu valor sem realmente ter concluído a transferência. Dessa forma, usamos o COMMIT para confirmar que tudo ocorreu certo e salvar,
+e o ROLLBACK para desfazer tudo caso ocorra um erro que impeça de completar a transação de forma satisfatória.
+Sem o uso de COMMIT e ROLLBACK, o banco não teria controle sobre o que foi parcialmente executado.

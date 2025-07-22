@@ -1,0 +1,6 @@
+Debugging é o processo de identificar e resolver erros ou comportamentos inesperados no código. No dia a dia, normalmente uso a IDE (tipo IntelliJ ou Eclipse)
+pra colocar breakpoints — que são pontos onde a execução do código para pra eu poder inspecionar o que tá acontecendo naquele momento.
+A partir daí, consigo ver o valor das variáveis, a pilha de execução, e ir passo a passo pra entender onde o fluxo tá saindo do esperado.
+Também costumo usar logs pra ter mais visibilidade, especialmente em ambientes onde não dá pra usar debug direto, tipo produção.
+Com o tempo, você vai pegando prática de onde colocar o breakpoint certo, entender o comportamento assíncrono, ou até analisar chamadas de API
+e queries SQL envolvidas no processo. É uma habilidade que vai sendo refinada com a experiência e bastante tentativa e erro.

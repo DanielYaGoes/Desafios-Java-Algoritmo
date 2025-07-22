@@ -1,0 +1,5 @@
+Os triggers (ou gatilhos) são fundamentais para manter a integridade e a segurança dos dados, pois permitem que certas ações sejam tomadas automaticamente, sem depender da aplicação ou do usuário
+lembrar de executá-las manualmente.Os triggers ajudam a garantir que regras importantes do sistema sejam sempre respeitadas, além de permitir o registro de alterações em tabelas
+de auditoria, o que aumenta a segurança e a rastreabilidade das informações.Um trigger, por exemplo, pode ser configurado para que sempre que uma transação financeira for registrada,
+um log automático seja salvo em uma tabela de auditoria, contendo informações como o valor alterado, o saldo anterior e o novo saldo. Com os triggers reduzimos o risco de erros humanos
+que poderia ser esquecer, o que seria péssimo para integridade e segurança

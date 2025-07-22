@@ -1,0 +1,22 @@
+DELIMITER $$
+
+CREATE TRIGGER trg_audit_after_transaction
+AFTER INSERT ON transactions
+FOR EACH ROW
+BEGIN
+    DECLARE v_old_balance DECIMAL(15,2);
+    DECLARE v_new_balance DECIMAL(15,2);
+
+    -- Obter saldo antigo e novo da conta
+    SELECT balance INTO v_new_balance
+    FROM accounts
+    WHERE account_id = NEW.account_id;
+
+    SET v_old_balance = v_new_balance - NEW.amount;
+
+    -- Inserir registro de auditoria
+    INSERT INTO audit_log(transaction_id, account_id, old_balance, new_balance, change_date)
+    VALUES (NEW.transaction_id, NEW.account_id, v_old_balance, v_new_balance, NOW());
+END$$
+
+DELIMITER ;

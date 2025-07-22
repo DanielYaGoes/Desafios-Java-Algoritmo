@@ -1,0 +1,99 @@
+Essa procedure é responsável por realizar uma transação bancária, alterando o saldo de uma conta e registrando a transação e sua auditoria.
+CREATE PROCEDURE InserirTransacao(
+    IN p_account_id INT,
+    IN p_amount DECIMAL(15,2)
+)
+
+
+Logo no início, a procedure declara três variáveis locais
+DECLARE v_old_balance DECIMAL(15,2);
+DECLARE v_new_balance DECIMAL(15,2);
+DECLARE v_transaction_id INT;
+
+v_old_balance: guarda o saldo antes da transação.
+v_new_balance: armazena o novo saldo calculado.
+v_transaction_id: será usado para guardar o ID gerado da transação recém-inserida.
+
+START TRANSACTION;
+
+Esse comando inicia uma transação no banco de dados. Com isso, nenhuma alteração será definitiva até que o COMMIT seja chamado, garantindo a integridade em exercicios anteriormente chamados
+
+SELECT balance INTO v_old_balance
+FROM accounts
+WHERE account_id = p_account_id
+FOR UPDATE;
+
+Aqui, o sistema consulta o saldo atual da conta informada (p_account_id) e o armazena em v_old_balance.
+O FOR UPDATE bloqueia essa linha até o final da transação, impedindo que outra operação altere o saldo ao mesmo tempo (garante consistência).
+
+SET v_new_balance = v_old_balance + p_amount;
+
+Calcula o novo sado e armazena na variavel v_new_balance
+
+UPDATE accounts
+SET balance = v_new_balance
+WHERE account_id = p_account_id;
+
+Atualiza o saldo da conta com o novo valor calculado.
+
+INSERT INTO transactions(account_id, amount, transaction_date)
+VALUES (p_account_id, p_amount, NOW());
+
+Grava a transação na tabela transactions, com o ID da conta, o valor da transação e a data atual.
+
+SET v_transaction_id = LAST_INSERT_ID();
+
+Essa linha recupera o ID da transação recém-criada e guarda em v_transaction_id. Esse ID será usado no log de auditoria para associar os dados corretamente.
+
+INSERT INTO audit_log(transaction_id, account_id, old_balance, new_balance, change_date)
+VALUES (v_transaction_id, p_account_id, v_old_balance, v_new_balance, NOW());
+
+Cria um registro na tabela audit_log, guardando: O ID da transação, O ID da conta,O saldo antes e depois da transação, A data da modificação
+
+COMMIT;
+Se tudo deu certo até aqui, COMMIT é chamado para confirmar todas as operações. A partir desse ponto, todas as mudanças se tornam permanentes no banco.
+
+EXCEPTION
+    WHEN SQLEXCEPTION THEN
+        ROLLBACK;
+
+Se algum erro acontecer em qualquer parte da lógica (por exemplo, erro no insert, conta não encontrada, etc.), essa parte é executada.
+O ROLLBACK desfaz tudo que foi feito até aquele momento, garantindo que o banco não fique com dados incompletos ou corrompidos.
+
+
+/////////////////////
+
+Agora sobre o trigger
+CREATE TRIGGER trg_audit_after_transaction
+AFTER INSERT ON transactions
+FOR EACH ROW
+
+inicia o trigger chamado trg_audit_after_transaction definido que ele irá executar após uma inserção na tabela transactions. O trigger será executado uma vez para cada linha inserida
+
+DECLARE v_old_balance DECIMAL(15,2);
+DECLARE v_new_balance DECIMAL(15,2);
+
+declara as variaveis para antes e após da transação
+
+SELECT balance INTO v_new_balance
+FROM accounts
+WHERE account_id = NEW.account_id;
+
+O trigger acessa a tabela para buscar o saldo da conta atual , o NEW.account_id faz referencia ao valor inserido na nova linha da tabela transactions
+
+SET v_old_balance = v_new_balance - NEW.amount;
+Como a transação já foi inserida (o trigger é AFTER INSERT), o saldo atual (v_new_balance) já inclui o valor da transação.
+Para descobrir o saldo anterior, basta subtrair o valor da transação (NEW.amount) do saldo atual.
+
+INSERT INTO audit_log(transaction_id, account_id, old_balance, new_balance, change_date)
+VALUES (NEW.transaction_id, NEW.account_id, v_old_balance, v_new_balance, NOW());
+
+Com os valores obtidos, o trigger registra um log completo da transação
+transaction_id: ID da transação recém-inserida.
+account_id: conta envolvida.
+old_balance: saldo antes da transação.
+new_balance: saldo depois da transação.
+change_date: data/hora da alteração.
+
+END$$
+Indica o fim do trigger

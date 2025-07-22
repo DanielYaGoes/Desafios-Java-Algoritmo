@@ -1,0 +1,72 @@
+Hibernate é um framework de mapeamento objeto-relacional (ORM) usado no Java. Ele basicamente facilita a comunicação entre as classes Java e o banco de dados relacional.
+Em vez de escrever SQL puro pra manipular os dados, a gente trabalha com objetos Java, e o Hibernate cuida de transformar essas operações em comandos SQL por baixo dos panos.
+O legal do Hibernate é que ele ajuda a deixar o código mais limpo e desacoplado da lógica do banco. Ele também traz recursos como cache, lazy loading, e controle de transações.
+Mas, apesar de ajudar bastante, também tem uma curva de aprendizado e alguns comportamentos automáticos que a gente precisa entender bem pra não ter
+surpresa,principalmente em projetos maiores.
+
+Exemplo de classe mapeada com Hibernate
+
+package com.seuprojeto.model;
+
+import javax.persistence.*;
+import java.time.LocalDate;
+
+@Entity
+@Table(name = "pedido")
+//Define a classe como entidade e tabela.
+public class Pedido {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //Define a chave primária.
+    private Long id;
+
+    private LocalDate data;
+
+    @Column(nullable = false)
+    private Double valorTotal;
+
+    // Muitos pedidos para um cliente
+    @ManyToOne
+    @JoinColumn(name = "cliente_id", nullable = false)
+    //Define a foreign key (cliente_id) em pedido e não aceita valores null
+    private Cliente cliente;
+
+    public Pedido() {}
+
+    public Pedido(LocalDate data, Double valorTotal, Cliente cliente) {
+        this.data = data;
+        this.valorTotal = valorTotal;
+        this.cliente = cliente;
+    }
+
+    // Getters e setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public Double getValorTotal() {
+        return valorTotal;
+    }
+
+    public void setValorTotal(Double valorTotal) {
+        this.valorTotal = valorTotal;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
+    }
+}

@@ -1,0 +1,11 @@
+Maven e Gradle são ferramentas de automação de build usadas principalmente em projetos Java, e ambos também funcionam como gerenciadores de dependência. Isso significa que,
+em vez de baixar manualmente bibliotecas e configurar no projeto, a gente só declara o que precisa (por exemplo, spring-boot-starter-web)
+e eles resolvem tudo automaticamente:baixam a dependência certa,instalam transitive dependencies e organizam tudo no classpath.
+A principal diferença entre os dois está na forma como são configurados e na flexibilidade.
+O Maven usa arquivos XML (geralmente pom.xml) e tem uma estrutura mais padronizada. É super estável, fácil de entender pra quem tá começando, mas pode ser um pouco verboso.
+Já o Gradle usa scripts em Groovy ou Kotlin (geralmente build.gradle) e é bem mais flexível e conciso. Ele permite customizar mais o processo de build e costuma ser mais rápido
+, principalmente por causa do build incremental e cache.
+Hoje os dois são muito usados, e a escolha vai depender do projeto, da equipe e do quanto se precisa de personalização nos builds.
+
+Escolho ultilizar o maven pois é a alternativa mais difundida no mercado, com maior suporte da comunidade,
+super estável, mais padronizado e de maior fácil adaptação para novatos de equipe ou de profissão

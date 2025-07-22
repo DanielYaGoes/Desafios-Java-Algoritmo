@@ -1,0 +1,4 @@
+Agendamento de Backups frenquentes pois o sistema de um e-commerce ele muda bastante ,  o ideal é fazer backups completos diários, e backups incrementais de
+tempos em tempos ao longo do dia (por exemplo, a cada 15 minutos ou 1 hora) e se tratando de um banco que lida com clientes, implementar criptografia.
+Automatizar os Backups para não depender de alguém, testar a restauração garantir que está tudo certo em consistencia e integridade, para isso é importante monitorar os backups e guarda-los
+em local seguro como um armazenamento em nuvem.

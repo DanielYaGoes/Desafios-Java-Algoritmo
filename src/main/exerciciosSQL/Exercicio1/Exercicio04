@@ -1,0 +1,11 @@
+Trabalhei em um projeto de e-commerce de apostilas para concursos desenvolvido em Java, com JSP no frontend, Hibernate como ORM e PostgreSQL como banco de dados.
+Um dos desafios que enfrentei envolvia a página de histórico de pedidos acessada pelos clientes logados. Quando um usuário acessava essa página, o sistema carregava
+todos os pedidos já feitos por ele e, em alguns casos, havia clientes com mais de 600 pedidos. O problema era que a aplicação estava buscando todos os pedidos e 
+trazendo o objeto inteiro com dados que não estava ultilizando no front dessa forma estava gerando um tempo de carregamento alto, com a página demorando cerca de 
+3 segundos para ser exibida. Para resolver isso,adicionei um filtro de data que limita, por padrão, a exibição dos pedidos aos últimos três meses, com a possibilidade 
+de o usuário escolher "últimos 12 meses" ou "todos os pedidos" apenas se desejar. Isso reduz consideravelmente o volume de dados trafegados e processados.
+Além disso, modifiquei a consulta no Hibernate para que ela não carregasse o objeto inteiro do pedido com todas as suas associações, mas sim apenas os campos  necessários 
+para compor a listagem como o nome, opção de download e descrição . Isso ajudou a tornar a consulta mais leve, com menos joins e menos processamento tanto no banco quanto 
+na aplicação. Com essas mudanças, o tempo de resposta caiu drasticamente para menos de 300 milissegundos na maioria dos casos, e a experiência do usuário ficou muito mais 
+fluida. Essa otimização simples, baseada em entender o comportamento real dos usuários, trouxe um impacto positivo direto na performance da aplicação sem precisar recorrer 
+a caching ou paginação logo de início.

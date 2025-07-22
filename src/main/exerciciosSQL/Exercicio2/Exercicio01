@@ -1,0 +1,44 @@
+DELIMITER $$
+
+CREATE PROCEDURE InserirTransacao(
+    IN p_account_id INT,
+    IN p_amount DECIMAL(15,2)
+)
+BEGIN
+    DECLARE v_old_balance DECIMAL(15,2);
+    DECLARE v_new_balance DECIMAL(15,2);
+    DECLARE v_transaction_id INT;
+
+    START TRANSACTION;
+
+    BEGIN
+
+        SELECT balance INTO v_old_balance
+        FROM accounts
+        WHERE account_id = p_account_id
+        FOR UPDATE;
+
+
+        SET v_new_balance = v_old_balance + p_amount;
+
+        UPDATE accounts
+        SET balance = v_new_balance
+        WHERE account_id = p_account_id;
+
+        INSERT INTO transactions(account_id, amount, transaction_date)
+        VALUES (p_account_id, p_amount, NOW());
+
+        SET v_transaction_id = LAST_INSERT_ID();
+
+        INSERT INTO audit_log(transaction_id, account_id, old_balance, new_balance, change_date)
+        VALUES (v_transaction_id, p_account_id, v_old_balance, v_new_balance, NOW());
+
+        COMMIT;
+    END;
+
+EXCEPTION
+    WHEN SQLEXCEPTION THEN
+        ROLLBACK;
+END$$
+
+DELIMITER ;

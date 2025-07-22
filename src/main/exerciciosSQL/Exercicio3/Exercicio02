@@ -1,0 +1,7 @@
+em sistemas de grande porte e com muitos acessos simultâneos como é o caso de aplicações de e-commerce, pode ser vantajoso aplicar a desnormalização em algumas partes
+do banco para melhorar o desempenho das consultas eu consideraria desnormalizar uma estrutura de banco quando percebo que consultas muito frequentes e complexas estão
+comprometendo o tempo de resposta da aplicação. Por exemplo, se uma consulta precisar fazer muitos JOINs entre várias tabelas apenas para montar uma tela ou relatório,
+isso pode aumentar bastante o tempo de resposta, especialmente com muitos usuários acessando ao mesmo tempo. Nesse caso, copiar alguns dados para uma tabela de forma repetida
+com um certo cuidado pode ajudar a reduzir a complexidade da consulta. Também acho importante considerar a desnormalização quando os dados mudam pouco ou quase nunca. Por exemplo,
+nomes de produtos ou categorias geralmente não mudam com frequência. Se esses dados forem usados repetidamente em outras tabelas, pode valer a pena deixar uma cópia ali mesmo,
+porque o risco de inconsistência é bem menor, e o ganho de performance pode ser alto.

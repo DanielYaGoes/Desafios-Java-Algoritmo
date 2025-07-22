@@ -1,0 +1,7 @@
+Pra implementar uma solução de backup incremental com recuperação ponto a ponto, eu faria o seguinte: primeiro, começaria fazendo um backup completo de tudo,
+guardando ele direitinho. Depois, de tempos em tempos, faria só backups incrementais — ou seja, pegaria só o que mudou desde o último backup, pra economizar espaço e tempo.
+Pra poder recuperar exatamente um ponto no tempo que eu quiser, eu manteria um controle bem organizado de quando cada backup incremental foi feito e o que ele tem de diferente.
+Assim, quando precisar restaurar, eu primeiro aplico o backup completo e depois vou aplicando um por um os incrementais até chegar no momento que quero.
+Também cuidaria de garantir que os backups não estejam corrompidos, com umas checagens básicas. Se for banco de dados, por exemplo, usaria os logs de transação junto com os
+backups incrementais pra poder recuperar com mais precisão ainda. No final, tudo isso estaria automatizado pra rodar sem precisar ficar manualmente mexendo, com alertas caso algo
+dê errado, pra garantir que quando precisar, a recuperação seja rápida e certeira.

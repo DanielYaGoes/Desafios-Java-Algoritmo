@@ -1,0 +1,10 @@
+Testes unitários são extremamente importantes no desenvolvimento de software porque garantem que partes específicas do código geralmente métodos ou classes estejam funcionando como esperado de forma isolada.
+Com eles, a gente consegue:
+Detectar erros cedo, logo após uma mudança no código.
+Ter mais segurança ao refatorar ou adicionar novas funcionalidades.
+Ajudar a documentar o comportamento esperado de cada componente.
+Automatizar a validação do código em pipelines de CI/CD.
+Especialmente em sistemas que crescem rápido ou têm muitas regras, os testes unitários ajudam a evitar efeitos colaterais inesperados e aumentam a confiabilidade do software.
+
+
+O teste da Classe CacheLRU está localizado em: src/test/java/TestExercicio01/CacheLRUTest.java

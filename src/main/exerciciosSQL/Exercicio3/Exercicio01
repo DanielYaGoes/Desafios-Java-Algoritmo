@@ -1,0 +1,10 @@
+1FN (Primeira Forma Normal): Garantimos que todos os campos contenham apenas valores atômicos (ou seja, indivisíveis) e que cada valor esteja em sua própria célula.
+No caso das tabelas apresentadas, todas já seguem essa forma — por exemplo, customer_name e email não têm listas ou múltiplos dados em uma mesma célula.
+
+2FN (Segunda Forma Normal): Aqui, garantimos que todos os campos não-chave dependam da chave primária inteira. Como as tabelas order_items têm uma chave composta (order_id, product_id),
+os campos como quantity e price dependem corretamente dessa chave. Assim, essa forma também está respeitada.
+
+3FN (Terceira Forma Normal): Nessa forma, removemos dependências transitivas — ou seja, garantimos que os campos dependam somente da chave primária e não de outro campo não-chave.
+Por exemplo, em orders, o campo total_amount pode ser calculado somando os order_items, então em um modelo totalmente normalizado ele poderia ser retirado. Mas mantê-lo pode
+ser uma escolha por performance.
+

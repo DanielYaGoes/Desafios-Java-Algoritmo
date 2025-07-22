@@ -1,0 +1,22 @@
+
+SELECT
+    u.username,
+    COUNT(l.id) AS total_likes
+FROM users u
+LEFT JOIN posts p ON u.id = p.user_id
+LEFT JOIN likes l ON p.id = l.post_id
+GROUP BY u.id, u.username
+ORDER BY total_likes DESC;
+
+
+SELECT
+    u.username,
+    COUNT(p.id) AS total_posts
+FROM users u
+JOIN posts p ON u.id = p.user_id
+WHERE p.created_at >= NOW() - INTERVAL 30 DAY
+GROUP BY u.id, u.username
+ORDER BY total_posts DESC
+LIMIT 5;
+
+supoe uma tabela like pois ela não é mostrada no print

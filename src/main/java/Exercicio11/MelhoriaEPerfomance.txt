@@ -1,0 +1,12 @@
+Sempre tento reproduzir o problema em ambiente controlado (local ou homologação). Isso ajuda a testar com segurança e isolar variáveis sem afetar produção.
+Uso ferramentas pra levantar dados de uso de CPU, memória, tempo de resposta, garbage colector, número de threads, etc. Logs com tempo de execução também ajudam
+ a identificar pontos fora do padrão.
+Com os dados em mãos, identifico se o gargalo é:CPU ou memória alta (talvez um algoritmo ineficiente ou vazamento de memória);
+Banco de dados (query mal feita, falta de índice, volume grande sem paginação);IO externa lenta (API, arquivos, rede);
+Concorrência mal gerenciada (deadlocks, excesso de sincronização).
+Quando o problema é mais profundo, uso um profiler pra ver quais métodos estão mais custosos. Isso ajuda a identificar gargalos que não aparecem só com log.
+Depois de entender a causa, aplico correções pontuais. Pode ser otimizar uma query, adicionar um cache, melhorar a estrutura de dados, evitar laços desnecessários
+ou ajustar alguma concorrência. Tudo sempre focado no ponto que realmente está causando impacto.
+Após cada alteração, comparo as métricas com as anteriores pra garantir que o problema foi resolvido — e que não surgiram novos.
+Se for algo crítico ou recorrente, configuro alertas e dashboards pra acompanhar o comportamento do sistema em tempo real.
+Resumindo: o foco é sempre entender antes de otimizar. Com dados e ferramentas certas, dá pra atacar a causa raiz e melhorar a performance de forma sustentável.

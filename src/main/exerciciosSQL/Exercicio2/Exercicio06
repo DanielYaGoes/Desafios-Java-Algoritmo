@@ -1,0 +1,10 @@
+Uma das coisas que eu procuro fazer é não usar concatenação de strings para montar comandos SQL, especialmente quando os dados vêm de fora, como de um formulário ou sistema.
+Em vez disso, eu tento usar parâmetros nas consultas, porque assim o banco sabe que aquilo é só um valor, e não um comando que pode ser executado. Isso ajuda bastante a evitar
+que alguém consiga injetar comandos maliciosos. Também aprendi que o uso de SQL dinâmico pode ser perigoso, e por isso eu evito sempre que posso. Mas se for realmente necessário,
+como quando o nome da tabela precisa mudar dinamicamente, eu uso o sp_executesql com parâmetros, que é mais seguro do que juntar tudo numa string com +. Outra coisa que eu sempre procuro
+lembrar é de validar os dados recebidos, mesmo que eu esteja usando parâmetros. Tento verificar se os dados estão no formato certo e se não têm nada estranho, porque isso pode evitar tanto
+erros quanto problemas de segurança. Além disso, eu estudo e tento aplicar o que chamam de princípio do menor privilégio. Isso significa que uma procedure ou trigger só deve ter permissão
+para fazer o que realmente precisa. Por exemplo, se ela só precisa ler dados, não deve ter acesso para alterar ou deletar. Isso deixa o sistema mais seguro caso algo saia errado.
+No caso das triggers, mesmo que elas não recebam dados direto do usuário, eu fico atento porque elas trabalham com os dados modificados nas tabelas, como os que vêm do INSERTED e DELETED.
+Se for necessário usar esses dados em comandos SQL, eu tomo o mesmo cuidado de não montar SQL por concatenação e sempre tento usar parâmetros. E antes de finalizar qualquer procedure ou
+trigger, eu gosto de revisar o código com calma e até fazer alguns testes com dados diferentes, pra ver se está tudo funcionando certinho e se não tem risco de alguém explorar alguma brecha.
